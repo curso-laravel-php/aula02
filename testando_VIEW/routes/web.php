@@ -11,6 +11,24 @@
 |
 */
 
+use Illuminate\Http\Request;
+
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/info', function () {
+    phpinfo();
+});
+
+
+Route::get('/hello-world/{n}/{idade?}', function (Request $r, $nome, $idade="-") {
+    echo($r->id);
+    dd($r);
+    return "Hello world, $nome ! \n Vc tem $idade anos.";
+});
+
+Route::get('/boatarde/{nome?}', function ($nome="") {
+    return view('boatarde', ['nome' => $nome]);
+})->middleware('verifica-hora');
+
